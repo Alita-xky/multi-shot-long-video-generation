@@ -1,0 +1,171 @@
+{
+  "video": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_06_memory_cameractrl/C_trajectory/final.mp4",
+  "width": 960,
+  "height": 544,
+  "fps": 24,
+  "frame_count": 729,
+  "duration_s": 30.407,
+  "note": "Full C_trajectory final.mp4 (clip_01+clip_02+clip_03). clip_01_traj.mp4 is only the first 243 frames and does not return to the start. Orbit closure needs this full video. Frame 0 and frame 728 are the same pair used previously as clip_01 f0 and clip_03 f242.",
+  "frames": [
+    {
+      "filename": "frame_000000.png",
+      "original_frame_index": 0,
+      "timestamp": 0.0
+    },
+    {
+      "filename": "frame_000024.png",
+      "original_frame_index": 24,
+      "timestamp": 1.0
+    },
+    {
+      "filename": "frame_000048.png",
+      "original_frame_index": 48,
+      "timestamp": 2.0
+    },
+    {
+      "filename": "frame_000072.png",
+      "original_frame_index": 72,
+      "timestamp": 3.0
+    },
+    {
+      "filename": "frame_000096.png",
+      "original_frame_index": 96,
+      "timestamp": 4.0
+    },
+    {
+      "filename": "frame_000120.png",
+      "original_frame_index": 120,
+      "timestamp": 5.0
+    },
+    {
+      "filename": "frame_000144.png",
+      "original_frame_index": 144,
+      "timestamp": 6.0
+    },
+    {
+      "filename": "frame_000168.png",
+      "original_frame_index": 168,
+      "timestamp": 7.0
+    },
+    {
+      "filename": "frame_000192.png",
+      "original_frame_index": 192,
+      "timestamp": 8.0
+    },
+    {
+      "filename": "frame_000216.png",
+      "original_frame_index": 216,
+      "timestamp": 9.0
+    },
+    {
+      "filename": "frame_000240.png",
+      "original_frame_index": 240,
+      "timestamp": 10.0
+    },
+    {
+      "filename": "frame_000264.png",
+      "original_frame_index": 264,
+      "timestamp": 11.0
+    },
+    {
+      "filename": "frame_000288.png",
+      "original_frame_index": 288,
+      "timestamp": 12.0
+    },
+    {
+      "filename": "frame_000312.png",
+      "original_frame_index": 312,
+      "timestamp": 13.0
+    },
+    {
+      "filename": "frame_000336.png",
+      "original_frame_index": 336,
+      "timestamp": 14.0
+    },
+    {
+      "filename": "frame_000360.png",
+      "original_frame_index": 360,
+      "timestamp": 15.0
+    },
+    {
+      "filename": "frame_000384.png",
+      "original_frame_index": 384,
+      "timestamp": 16.0
+    },
+    {
+      "filename": "frame_000408.png",
+      "original_frame_index": 408,
+      "timestamp": 17.0
+    },
+    {
+      "filename": "frame_000432.png",
+      "original_frame_index": 432,
+      "timestamp": 18.0
+    },
+    {
+      "filename": "frame_000456.png",
+      "original_frame_index": 456,
+      "timestamp": 19.0
+    },
+    {
+      "filename": "frame_000480.png",
+      "original_frame_index": 480,
+      "timestamp": 20.0
+    },
+    {
+      "filename": "frame_000504.png",
+      "original_frame_index": 504,
+      "timestamp": 21.0
+    },
+    {
+      "filename": "frame_000528.png",
+      "original_frame_index": 528,
+      "timestamp": 22.0
+    },
+    {
+      "filename": "frame_000552.png",
+      "original_frame_index": 552,
+      "timestamp": 23.0
+    },
+    {
+      "filename": "frame_000576.png",
+      "original_frame_index": 576,
+      "timestamp": 24.0
+    },
+    {
+      "filename": "frame_000600.png",
+      "original_frame_index": 600,
+      "timestamp": 25.0
+    },
+    {
+      "filename": "frame_000624.png",
+      "original_frame_index": 624,
+      "timestamp": 26.0
+    },
+    {
+      "filename": "frame_000648.png",
+      "original_frame_index": 648,
+      "timestamp": 27.0
+    },
+    {
+      "filename": "frame_000672.png",
+      "original_frame_index": 672,
+      "timestamp": 28.0
+    },
+    {
+      "filename": "frame_000696.png",
+      "original_frame_index": 696,
+      "timestamp": 29.0
+    },
+    {
+      "filename": "frame_000720.png",
+      "original_frame_index": 720,
+      "timestamp": 30.0
+    },
+    {
+      "filename": "frame_000728.png",
+      "original_frame_index": 728,
+      "timestamp": 30.333333333333332
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "input_keyframes": 32,
+  "registered": 15,
+  "registration_ratio": 0.46875,
+  "registered_frames": [
+    0,
+    24,
+    48,
+    72,
+    96,
+    120,
+    144,
+    168,
+    192,
+    216,
+    240,
+    264,
+    384,
+    408,
+    432
+  ],
+  "sparse_points": 831,
+  "observations": 2977,
+  "mean_reprojection_px": 0.7823017840404849,
+  "median_reprojection_px": 0.6624719496652293,
+  "camera": {
+    "model": "SIMPLE_RADIAL",
+    "width": 960,
+    "height": 544,
+    "params": [
+      649.0946436240631,
+      480.0,
+      272.0,
+      -0.014895902748112064
+    ],
+    "f": 649.0946436240631,
+    "cx": 480.0,
+    "cy": 272.0,
+    "k": -0.014895902748112064
+  },
+  "hfov_deg_from_estimated_f": 72.96522459646967
+}

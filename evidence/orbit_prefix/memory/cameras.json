@@ -1,0 +1,457 @@
+{
+  "groups": {
+    "default": {
+      "reconstructor": "colmap",
+      "intrinsics_refined": true,
+      "principal_point_refined": false,
+      "mean_reproj_error": 0.7153164198841458,
+      "median_reproj_error": 0.6106262534162302,
+      "input_image_count": 11,
+      "pose_prior_count": 0,
+      "focal_prior_px": 1152.0,
+      "nominal_poses_used_in_mapping": false,
+      "cameras": [
+        {
+          "image_name": "frame_000000.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000000.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.2843180797384339,
+              -0.00107267215488753,
+              -0.9587294085967625
+            ],
+            [
+              -0.15744881073087402,
+              0.9863698079410588,
+              -0.04779617120389765
+            ],
+            [
+              0.945713012246994,
+              0.16454012081181604,
+              0.28027387875067855
+            ]
+          ],
+          "t_w2c": [
+            3.9490524263232216,
+            -0.6111754417345047,
+            3.5700746451545795
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 0,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000024.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000024.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.3636536510145342,
+              0.000337489285670331,
+              -0.9315341691021226
+            ],
+            [
+              -0.15343931351186757,
+              0.9863625433531252,
+              -0.05954250699257555
+            ],
+            [
+              0.918810317297758,
+              0.16458681347828616,
+              0.3587461242386566
+            ]
+          ],
+          "t_w2c": [
+            3.572394086441818,
+            -0.558146733301167,
+            3.1991157117114044
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 24,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000072.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000072.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.6973984070960275,
+              0.004200575592578783,
+              -0.7166713451398866
+            ],
+            [
+              -0.12252973761540958,
+              0.9859585524426762,
+              -0.11345570177404665
+            ],
+            [
+              0.7061316627795572,
+              0.16693737756965502,
+              0.6881206193614199
+            ]
+          ],
+          "t_w2c": [
+            2.0809146985341163,
+            -0.33035342603452944,
+            1.88178562638485
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 72,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000048.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000048.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.5173753172236548,
+              0.002860427694042822,
+              -0.8557538192033557
+            ],
+            [
+              -0.1446906304117332,
+              0.9858894297095123,
+              -0.08418226569835144
+            ],
+            [
+              0.8434378475019827,
+              0.16737338599807247,
+              0.5104887335297054
+            ]
+          ],
+          "t_w2c": [
+            2.974639643799544,
+            -0.437052277863243,
+            2.564854933670487
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 48,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000096.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000096.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.8500172229461689,
+              0.004074614318292306,
+              -0.5267391367774377
+            ],
+            [
+              -0.09049958820308224,
+              0.9862309999530469,
+              -0.13841329151019394
+            ],
+            [
+              0.5189224847989877,
+              0.1653233566371387,
+              0.838682086681404
+            ]
+          ],
+          "t_w2c": [
+            1.030163002371069,
+            -0.2597288178330798,
+            1.4369208550457298
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 96,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000120.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000120.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.9546845851853911,
+              0.004486002379760712,
+              -0.2975856491701951
+            ],
+            [
+              -0.05379729092207312,
+              0.9860168525627151,
+              -0.1577232321243857
+            ],
+            [
+              0.2927169183679746,
+              0.1665852401774113,
+              0.9415764246497417
+            ]
+          ],
+          "t_w2c": [
+            -0.08023597717098073,
+            -0.1982929347814112,
+            1.2449371388115544
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 120,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000144.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000144.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.9989934969094915,
+              0.005196471101706771,
+              -0.04455322458178617
+            ],
+            [
+              -0.012577049012206241,
+              0.9858730983347911,
+              -0.16702111189279023
+            ],
+            [
+              0.04305590517792549,
+              0.16741335271670693,
+              0.9849461702862045
+            ]
+          ],
+          "t_w2c": [
+            -1.2322873082748602,
+            -0.20024461151559175,
+            1.2975503378196875
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 144,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000192.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000192.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.8921252261973809,
+              0.0037384984753072448,
+              0.45177273535642026
+            ],
+            [
+              0.07128147151156523,
+              0.9862763289891637,
+              -0.14892264668211078
+            ],
+            [
+              -0.44612950205228297,
+              0.16506067522220128,
+              0.8796155074200165
+            ]
+          ],
+          "t_w2c": [
+            -3.219280853452545,
+            -0.38790934291803614,
+            2.3997210193288545
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 192,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000168.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000168.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.9768095625902531,
+              0.0054736087940833525,
+              0.21403999168147947
+            ],
+            [
+              0.030824973286016563,
+              0.9856638176802385,
+              -0.16588146230948772
+            ],
+            [
+              -0.21187944556788618,
+              0.16863237566608305,
+              0.9626371187644169
+            ]
+          ],
+          "t_w2c": [
+            -2.3108625015080726,
+            -0.25357440352146626,
+            1.6808902766909388
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 168,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000216.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000216.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.772362768143508,
+              0.0038137127075108246,
+              0.6351702212644122
+            ],
+            [
+              0.10104811805021086,
+              0.9865092959889596,
+              -0.12879707592130327
+            ],
+            [
+              -0.6270925228578382,
+              0.16366082158767223,
+              0.7615576821574579
+            ]
+          ],
+          "t_w2c": [
+            -3.8820408391070425,
+            -0.5211036294610805,
+            3.2504391182844268
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 216,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        },
+        {
+          "image_name": "frame_000240.png",
+          "image_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/colmap/default/images/frame_000240.png",
+          "registered": true,
+          "width": 960,
+          "height": 544,
+          "R_w2c": [
+            [
+              0.690761205837984,
+              0.00334106935218232,
+              0.7230752338206848
+            ],
+            [
+              0.11537949468857386,
+              0.9866674247178815,
+              -0.1147822512673146
+            ],
+            [
+              -0.7138182742930189,
+              0.16271518139426172,
+              0.6811660891656078
+            ]
+          ],
+          "t_w2c": [
+            -4.203306221856969,
+            -0.6127921938870193,
+            3.8051806219971582
+          ],
+          "model": "SIMPLE_RADIAL",
+          "fx": 666.0565324048167,
+          "fy": 666.0565324048167,
+          "cx": 480.0,
+          "cy": 272.0,
+          "k": 0.02162944318615806,
+          "intrinsics_refined": true,
+          "principal_point_refined": false,
+          "frame_index": 240,
+          "group_id": "default",
+          "reconstructor": "colmap"
+        }
+      ]
+    }
+  }
+}

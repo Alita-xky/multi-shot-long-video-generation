@@ -1,0 +1,37 @@
+{
+  "spatial": {
+    "input_images": 11,
+    "registered": 11,
+    "registration_ratio": 1.0,
+    "num_points": 663,
+    "mean_reproj_error": 0.7153164186005004,
+    "median_reproj_error": 0.6106262803077698,
+    "stored_mean_reproj_error": 0.7153164198841458,
+    "pose_prior_count": 0,
+    "trajectory": {
+      "num_cameras": 11,
+      "step_mean": 1.2478574244912952,
+      "step_std": 0.2902446568228324,
+      "turn_mean_deg": 11.51810604762701
+    },
+    "source_view_fill_median": 0.0008980545343137254,
+    "nominal_poses_used_in_mapping": false
+  },
+  "return": {
+    "name_a": "frame_000000.png",
+    "name_b": "frame_000240.png",
+    "registered_a": true,
+    "registered_b": true,
+    "verified_inliers": 0,
+    "closure_supported": false,
+    "center_distance": 10.557288453713587,
+    "relative_rotation_deg": 119.79126834493877,
+    "geometric_overlap": 0.39064856711915535,
+    "reason": "no_verified_matches",
+    "points_visible_in_both": 259
+  },
+  "objects": {
+    "status": "not_provided",
+    "objects": []
+  }
+}

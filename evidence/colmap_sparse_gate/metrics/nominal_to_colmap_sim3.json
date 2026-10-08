@@ -1,0 +1,118 @@
+{
+  "fit_frames": [
+    0,
+    24,
+    48,
+    72,
+    96,
+    120,
+    144
+  ],
+  "test_frames": [
+    168,
+    192,
+    216,
+    240,
+    264,
+    384,
+    408,
+    432
+  ],
+  "scale": 2.272165173537362,
+  "rotation": [
+    [
+      0.5362251836168174,
+      -0.019220850562021625,
+      -0.8438560963569459
+    ],
+    [
+      0.1750333006240265,
+      -0.9754774644859521,
+      0.13344309630969198
+    ],
+    [
+      -0.8257274950779888,
+      -0.21925846661812362,
+      -0.5197112935933754
+    ]
+  ],
+  "translation": [
+    -1.3480702734540837,
+    2.279195553102867,
+    3.7559805797632455
+  ],
+  "fit_position": {
+    "n": 7,
+    "median": 0.39268088647212795,
+    "p90": 0.4658755679751194,
+    "rmse": 0.36099396958073937
+  },
+  "test_position": {
+    "n": 8,
+    "median": 0.8166522883905869,
+    "p90": 3.772413751408732,
+    "rmse": 2.219574202903388
+  },
+  "fit_rotation_deg": {
+    "median_deg": 178.81047183093503,
+    "p90_deg": 179.38873805532546
+  },
+  "test_rotation_deg": {
+    "median_deg": 174.9186724950734,
+    "p90_deg": 179.43277006812414
+  },
+  "error_by_quartile_of_registered_sequence": [
+    {
+      "range": "0-25%",
+      "frames": [
+        0,
+        24,
+        48
+      ],
+      "position_median": 0.39268088647212795,
+      "position_p90": 0.5001356504913117,
+      "rotation_median_deg": 179.02969254698087,
+      "rotation_p90_deg": 179.56001612875775
+    },
+    {
+      "range": "25-50%",
+      "frames": [
+        72,
+        96,
+        120,
+        144
+      ],
+      "position_median": 0.3447833225544918,
+      "position_p90": 0.41845474170722285,
+      "rotation_median_deg": 178.6330851821766,
+      "rotation_p90_deg": 179.0729272722591
+    },
+    {
+      "range": "50-75%",
+      "frames": [
+        168,
+        192,
+        216,
+        240
+      ],
+      "position_median": 0.639097475396415,
+      "position_p90": 0.7126730524563739,
+      "rotation_median_deg": 179.3831512990131,
+      "rotation_p90_deg": 179.48470608837576
+    },
+    {
+      "range": "75-100%",
+      "frames": [
+        264,
+        384,
+        408,
+        432
+      ],
+      "position_median": 2.691769704859058,
+      "position_p90": 4.282377237311554,
+      "rotation_median_deg": 167.92115652480487,
+      "rotation_p90_deg": 170.78935354649073
+    }
+  ],
+  "note": "Sim3 maps nominal camera centers into the COLMAP world. Fit uses the first half of registered frames sorted by time. Errors are in COLMAP units, which are arbitrary."
+}

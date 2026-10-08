@@ -1,0 +1,57 @@
+[
+  {
+    "pair": "0->24",
+    "matches": 312,
+    "both_registered": true,
+    "colmap_median_sampson": 2.9664717618020396e-07,
+    "colmap_rotation_vs_nominal_deg": null,
+    "nominal_median_sampson": 9.820411046792369e-05,
+    "ratio_nominal_over_colmap": 331.0468406692931,
+    "relative_rotation_disagreement_deg": 15.20368203548132
+  },
+  {
+    "pair": "24->48",
+    "matches": 185,
+    "both_registered": true,
+    "colmap_median_sampson": 4.0192335777834095e-07,
+    "colmap_rotation_vs_nominal_deg": null,
+    "nominal_median_sampson": 0.0002524030157604576,
+    "ratio_nominal_over_colmap": 627.9879257469202,
+    "relative_rotation_disagreement_deg": 21.676567709647028
+  },
+  {
+    "pair": "48->72",
+    "matches": 170,
+    "both_registered": true,
+    "colmap_median_sampson": 3.7863252620688706e-07,
+    "colmap_rotation_vs_nominal_deg": null,
+    "nominal_median_sampson": 9.110329481222724e-05,
+    "ratio_nominal_over_colmap": 240.61138044555597,
+    "relative_rotation_disagreement_deg": 25.53786535308813
+  },
+  {
+    "pair": "72->96",
+    "matches": 219,
+    "both_registered": true,
+    "colmap_median_sampson": 3.5989150241373814e-07,
+    "colmap_rotation_vs_nominal_deg": null,
+    "nominal_median_sampson": 0.00021537713074919177,
+    "ratio_nominal_over_colmap": 598.4501698558864,
+    "relative_rotation_disagreement_deg": 26.086217234465774
+  },
+  {
+    "pair": "0->48",
+    "matches": 94,
+    "both_registered": true,
+    "colmap_median_sampson": 6.616488236417993e-07,
+    "colmap_rotation_vs_nominal_deg": null,
+    "nominal_median_sampson": 0.0007601215399366926,
+    "ratio_nominal_over_colmap": 1148.8292773693556,
+    "relative_rotation_disagreement_deg": 36.871839325018335
+  },
+  {
+    "pair": "0->728",
+    "matches": 0,
+    "both_registered": false
+  }
+]

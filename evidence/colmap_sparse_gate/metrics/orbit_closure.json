@@ -1,0 +1,15 @@
+{
+  "registered_first_frame": 0,
+  "registered_last_frame": 432,
+  "video_start_frame": 0,
+  "video_return_frame": 728,
+  "video_return_registered": false,
+  "video_start_registered": true,
+  "registered_endpoint_center_distance": 9.247402630191477,
+  "scene_scale_median_radius": 3.228005361685132,
+  "normalized_closure_registered_endpoints": 2.864742029227612,
+  "registered_endpoint_rotation_deg": 156.43786582048762,
+  "note": "COLMAP scale is arbitrary. normalized_closure uses median camera-center distance to the trajectory centroid. The generated orbit's returning frame is 728; if it is unregistered, the registered-endpoint distance is not an orbit closure.",
+  "inliers_registered_endpoints": 0,
+  "inliers_frame0_vs_728": 0
+}

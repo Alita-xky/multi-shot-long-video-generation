@@ -1,0 +1,44 @@
+{
+  "baseline": {
+    "prompt": "A continuous shot that stays in the same room.",
+    "references": [
+      [
+        "image",
+        "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/images/frame_000000.png"
+      ]
+    ],
+    "argv": [
+      "--prompt",
+      "A continuous shot that stays in the same room.",
+      "--reference",
+      "image:/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/images/frame_000000.png"
+    ],
+    "uses_memory_view": false,
+    "changes_weights": false,
+    "mask_path": null
+  },
+  "proposed": {
+    "prompt": "A continuous shot that stays in the same room.\n\n<Picture 2> is a render of the persistent 3D scene memory from the requested viewpoint. Black pixels are unobserved. They are not a new room, and they must not be filled by inventing layout.",
+    "references": [
+      [
+        "image",
+        "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/images/frame_000000.png"
+      ],
+      [
+        "image",
+        "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/memory_view/memory_view.png"
+      ]
+    ],
+    "argv": [
+      "--prompt",
+      "A continuous shot that stays in the same room.\n\n<Picture 2> is a render of the persistent 3D scene memory from the requested viewpoint. Black pixels are unobserved. They are not a new room, and they must not be filled by inventing layout.",
+      "--reference",
+      "image:/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/images/frame_000000.png",
+      "--reference",
+      "image:/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/memory_view/memory_view.png"
+    ],
+    "uses_memory_view": true,
+    "changes_weights": false,
+    "mask_path": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_data/1007_scene_memory/runs/orbit_prefix/memory_view/memory_mask.png"
+  }
+}
