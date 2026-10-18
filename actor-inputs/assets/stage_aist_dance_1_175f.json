@@ -1,0 +1,38 @@
+{
+  "name": "street_dance_175",
+  "notes": "Full 175-frame window: a street dancer performs in the middle of the road, camera walks slowly toward him and keeps him framed.",
+  "fps": 24,
+  "frames": 175,
+  "size": [1344, 768],
+  "style": "live-action, photorealistic, sunny late afternoon, old-town street",
+  "world": {"generator": "street", "seed": 7},
+  "camera": {
+    "fov_deg": 50,
+    "ease": "linear",
+    "bob": 0.02,
+    "keyframes": [
+      {"t": 0.0,  "pos": [0.3, 1.65, 3.0],  "look_at": {"actor": "A1", "height": 1.1}},
+      {"t": 7.29, "pos": [0.3, 1.65, -3.0], "look_at": {"actor": "A1", "height": 1.1}}
+    ]
+  },
+  "actors": [
+    {
+      "id": "A1",
+      "name": "dancer",
+      "appearance": "young man in a loose beige long-sleeved shirt, dark trousers, white sneakers and a white bucket hat",
+      "track": {"type": "stand", "x": 0.0, "z": -9.0, "yaw": 180},
+      "performance": {
+        "type": "gvhmr",
+        "results": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/001/output/hmr4d_results.pt",
+        "src_fps": 30, "src_offset": 0.0, "speed": 1.0, "root_motion": "track+local",
+        "caption": "dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations, drifting about a metre to his left over the clip"
+      }
+    }
+  ],
+  "audio": {
+    "ambience": "quiet old-town street, distant birdsong, light breeze in the leaves, faint fountain splash far ahead",
+    "sfx_from_motion": true,
+    "dialogue": [],
+    "music": "N/A"
+  }
+}

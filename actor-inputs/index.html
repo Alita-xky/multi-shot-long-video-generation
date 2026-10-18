@@ -1,0 +1,289 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>Actor-in-whitebox 输入可视化</title>
+<style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;margin:24px;background:#111;color:#ddd;max-width:1500px}
+h1{font-size:22px}h2{font-size:18px;margin-top:36px;border-bottom:1px solid #333;padding-bottom:4px}
+.row{display:flex;flex-wrap:wrap;gap:14px}figure{margin:0}figcaption{font-size:12px;color:#999;max-width:448px}
+video,img{background:#000;border:1px solid #333}pre{white-space:pre-wrap;font-size:12px;background:#1a1a1a;padding:10px;border:1px solid #333}
+details{margin:8px 0;max-width:1100px}summary{cursor:pointer;color:#8cf}.missing{color:#c66;font-size:13px;padding:8px;border:1px dashed #633}
+p.note{color:#aaa;font-size:13px;max-width:1100px}</style></head><body>
+<h1>Actor-in-whitebox：从参考视频到 H3 控制输入（2026-10-18）</h1>
+<p class="note">链路：参考视频 → GVHMR 世界坐标 SMPL-X → 放进白模街道（box 轨迹 + 表演）→ 从舞台相机渲染 depth / pose / mask → ControlNet。下面按这个顺序排列，所有视频都可以点开循环播放。</p>
+<h2>1. 参考视频（动作来源）</h2><div class="row">
+<figure><a href="assets/ref_sheet.jpg" target="_blank"><img src="assets/ref_sheet.jpg" width="1100"></a><figcaption>10 段参考视频各取一帧</figcaption></figure>
+</div><div class="row">
+<figure><video src="assets/ref_aist_dance_1.mp4" width="360" controls loop muted playsinline></video><figcaption>ref_aist_dance_1.mp4</figcaption></figure>
+<figure><video src="assets/ref_movid_cartwheel.mp4" width="360" controls loop muted playsinline></video><figcaption>ref_movid_cartwheel.mp4</figcaption></figure>
+<figure><video src="assets/ref_web_slip.mp4" width="360" controls loop muted playsinline></video><figcaption>ref_web_slip.mp4</figcaption></figure>
+<figure><video src="assets/ref_web_party.mp4" width="360" controls loop muted playsinline></video><figcaption>ref_web_party.mp4</figcaption></figure>
+</div>
+<h2>2. GVHMR 重建叠加回原视频</h2><p class="note">左：SMPL-X 网格（相机坐标）半透明叠加 + 22 个关节；右：重力对齐世界坐标下的同一骨架（侧视）和骨盆俯视轨迹。这一层直接看出 3D 恢复质量：贴合度、脚是否接地、位移是否合理。</p><div class="row">
+<div class="missing">待生成: gvhmr_001_aist_dance_1.mp4</div>
+<div class="missing">待生成: gvhmr_002_flexiact_chest.mp4</div>
+<div class="missing">待生成: gvhmr_003_flexiact_crouch.mp4</div>
+<div class="missing">待生成: gvhmr_004_flexiact_one_leg.mp4</div>
+<div class="missing">待生成: gvhmr_005_flexiact_rotate.mp4</div>
+<div class="missing">待生成: gvhmr_006_flexiact_yoga.mp4</div>
+<div class="missing">待生成: gvhmr_007_movid_cartwheel.mp4</div>
+<div class="missing">待生成: gvhmr_008_web_party.mp4</div>
+<div class="missing">待生成: gvhmr_009_web_slip.mp4</div>
+<div class="missing">待生成: gvhmr_010_web_wakeup.mp4</div>
+</div><div class="row">
+<figure><a href="assets/traj_001.png" target="_blank"><img src="assets/traj_001.png" width="360"></a><figcaption>aist_dance_1 骨盆俯视轨迹（每秒一个点，箭头=朝向）</figcaption></figure>
+<figure><a href="assets/traj_007.png" target="_blank"><img src="assets/traj_007.png" width="360"></a><figcaption>movid_cartwheel 骨盆俯视轨迹：沿朝向前进 2.4 m，倒立在 3.0–3.8 s</figcaption></figure>
+</div>
+<h2>3. 舞台俯视图（导演视角的 blocking）</h2><p class="note">灰=路面，米=人行道，棕=建筑，红=停着的车，绿=树。黑线=相机路径和每秒的视锥；彩色方框=人物 box 每秒的位置和朝向，实线=表演根节点轨迹。</p><div class="row">
+<figure><a href="assets/street_cartwheel_smoke_plan.png" target="_blank"><img src="assets/street_cartwheel_smoke_plan.png" width="440"></a><figcaption>73 帧 smoke：侧手翻横穿马路，相机慢慢走近</figcaption></figure>
+<figure><a href="assets/street_dance_175_plan.png" target="_blank"><img src="assets/street_dance_175_plan.png" width="440"></a><figcaption>175 帧：舞者在 (0,-9) 原地表演，相机 7 s 从 z=3 走到 -3</figcaption></figure>
+<figure><a href="assets/street_two_actors_plan.png" target="_blank"><img src="assets/street_two_actors_plan.png" width="440"></a><figcaption>双人剧本：舞者 + 沿右侧人行道走过的路人（仅 box）</figcaption></figure>
+</div>
+<h2>4. 放进白模后的控制输入（喂给 ControlNet 的东西）</h2><p class="note">四格：左上 灰模预览（人物稍深），右上 合并深度（ControlNet depth 通道），左下 OpenPose 骨架（pose 通道，被场景遮挡的关节已剔除），右下 人物 mask（分区域控制）。</p>
+<h3 style="font-size:15px">侧手翻 73 帧 smoke</h3><div class="row">
+<figure><video src="assets/cues_movid_cartwheel_73f_2x2.mp4" width="900" controls loop muted playsinline></video><figcaption>cues_movid_cartwheel_73f_2x2.mp4 — 四格合成</figcaption></figure>
+</div><div class="row">
+<figure><video src="assets/movid_cartwheel_73f_whitebox_actor.mp4" width="448" controls loop muted playsinline></video><figcaption>movid_cartwheel_73f_whitebox_actor.mp4</figcaption></figure>
+<figure><video src="assets/movid_cartwheel_73f_depth_actor.mp4" width="448" controls loop muted playsinline></video><figcaption>movid_cartwheel_73f_depth_actor.mp4</figcaption></figure>
+<figure><video src="assets/movid_cartwheel_73f_pose.mp4" width="448" controls loop muted playsinline></video><figcaption>movid_cartwheel_73f_pose.mp4</figcaption></figure>
+</div>
+<details><summary>prompt_movid_cartwheel_73f.txt</summary><pre>integrated_multimodal_description: [Shot 1] Live-action, photorealistic, sunny late afternoon, old-town street footage, lasting about 3 seconds as one continuous shot. The camera moves forward slowly down the middle of the street at eye level (1.65 m), covering about 2.4 m in 3.0 seconds with a slight hand-held walking bob, keeping the martial artist framed. A straight two-lane road of worn grey cobblestones runs between raised sidewalks of large pale stone slabs with granite kerbs. Both sides are lined with three- to six-storey buildings with smooth plaster facades in warm muted colours, ochre, pale terracotta, cream and soft sage, each with a grid of rectangular windows in white-painted frames with dark reflective glass and thin curtains, small third-floor balconies with black wrought-iron railings, a carved light-stone ledge above the ground floor and a stone cornice at the roofline. The ground floors have wooden doors and shop fronts, some under striped canvas awnings in dark green and cream. Along both sidewalks stand black cast-iron street lamps with lantern heads, alternating with plane trees with dense green foliage and mottled trunks growing from square stone planters with small flowers, and a few wooden benches on iron frames. Compact European hatchbacks in silver, dark blue, white and red are parked along both kerbs. At the far end, a round stone fountain sprays water from its central column into the basin in front of a wide cream-coloured building with a stone arcade. Warm low sun from the left casts long soft shadows of the trees and lamps across the cobblestones and lights the upper floors of the right-hand facades, while the left-hand facades are in cool shade. The sky is clear blue with a few thin clouds. Young man in a white long-sleeved shirt and black trousers (martial artist) is about 10 m ahead of the camera in the centre of the frame, 7 m by the end of the shot, seen from the side (facing screen left). He steps forward, swings his arms up and does a full cartwheel from right to left across the cobblestones, landing on his feet in a ready stance. He is the only person in the shot; no moving cars, and no text or lettered signs appear.
+
+overall_soundscape: Quiet old-town street, distant birdsong, light breeze in the leaves; the scuffs, taps and breathing of the martial artist as he steps forward, swings his arms up and does a full cartwheel from right to left across the cobblestones, landing on his feet in a ready stance.
+
+non_diegetic_music: N/A
+</pre></details>
+<details><summary>stage_movid_cartwheel_73f.json</summary><pre>{
+  &quot;name&quot;: &quot;street_cartwheel_smoke&quot;,
+  &quot;notes&quot;: &quot;73-frame go/no-go for the pose+depth cue path: one performer does a cartwheel across the road while the camera walks slowly toward him.&quot;,
+  &quot;fps&quot;: 24,
+  &quot;frames&quot;: 73,
+  &quot;size&quot;: [1344, 768],
+  &quot;style&quot;: &quot;live-action, photorealistic, sunny late afternoon, old-town street&quot;,
+  &quot;world&quot;: {&quot;generator&quot;: &quot;street&quot;, &quot;seed&quot;: 7},
+  &quot;camera&quot;: {
+    &quot;fov_deg&quot;: 50,
+    &quot;ease&quot;: &quot;linear&quot;,
+    &quot;bob&quot;: 0.02,
+    &quot;keyframes&quot;: [
+      {&quot;t&quot;: 0.0,  &quot;pos&quot;: [0.3, 1.65, 3.0],  &quot;look_at&quot;: {&quot;actor&quot;: &quot;A1&quot;, &quot;height&quot;: 1.0}},
+      {&quot;t&quot;: 3.04, &quot;pos&quot;: [0.3, 1.65, 0.6],  &quot;look_at&quot;: {&quot;actor&quot;: &quot;A1&quot;, &quot;height&quot;: 1.0}}
+    ]
+  },
+  &quot;actors&quot;: [
+    {
+      &quot;id&quot;: &quot;A1&quot;,
+      &quot;name&quot;: &quot;martial artist&quot;,
+      &quot;appearance&quot;: &quot;young man in a white long-sleeved shirt and black trousers&quot;,
+      &quot;track&quot;: {&quot;type&quot;: &quot;stand&quot;, &quot;x&quot;: 1.3, &quot;z&quot;: -6.5, &quot;yaw&quot;: 90},
+      &quot;performance&quot;: {
+        &quot;type&quot;: &quot;gvhmr&quot;,
+        &quot;results&quot;: &quot;/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/007/output/hmr4d_results.pt&quot;,
+        &quot;src_fps&quot;: 30, &quot;src_offset&quot;: 1.5, &quot;speed&quot;: 1.0, &quot;root_motion&quot;: &quot;track+local&quot;,
+        &quot;caption&quot;: &quot;steps forward, swings his arms up and does a full cartwheel from right to left across the cobblestones, landing on his feet in a ready stance&quot;
+      }
+    }
+  ],
+  &quot;audio&quot;: {
+    &quot;ambience&quot;: &quot;quiet old-town street, distant birdsong, light breeze in the leaves&quot;,
+    &quot;sfx_from_motion&quot;: true,
+    &quot;dialogue&quot;: [],
+    &quot;music&quot;: &quot;N/A&quot;
+  }
+}
+</pre></details>
+<h3 style="font-size:15px">舞蹈 175 帧</h3><div class="row">
+<figure><video src="assets/cues_aist_dance_1_175f_2x2.mp4" width="900" controls loop muted playsinline></video><figcaption>cues_aist_dance_1_175f_2x2.mp4 — 四格合成</figcaption></figure>
+</div><div class="row">
+<figure><video src="assets/aist_dance_1_175f_whitebox_actor.mp4" width="448" controls loop muted playsinline></video><figcaption>aist_dance_1_175f_whitebox_actor.mp4</figcaption></figure>
+<figure><video src="assets/aist_dance_1_175f_depth_actor.mp4" width="448" controls loop muted playsinline></video><figcaption>aist_dance_1_175f_depth_actor.mp4</figcaption></figure>
+<figure><video src="assets/aist_dance_1_175f_pose.mp4" width="448" controls loop muted playsinline></video><figcaption>aist_dance_1_175f_pose.mp4</figcaption></figure>
+</div>
+<details><summary>prompt_aist_dance_1_175f.txt</summary><pre>integrated_multimodal_description: [Shot 1] Live-action, photorealistic, sunny late afternoon, old-town street footage, lasting about 7 seconds as one continuous shot. The camera moves forward slowly down the middle of the street at eye level (1.65 m), covering about 6.0 m in 7.3 seconds with a slight hand-held walking bob, keeping the dancer framed. A straight two-lane road of worn grey cobblestones runs between raised sidewalks of large pale stone slabs with granite kerbs. Both sides are lined with three- to six-storey buildings with smooth plaster facades in warm muted colours, ochre, pale terracotta, cream and soft sage, each with a grid of rectangular windows in white-painted frames with dark reflective glass and thin curtains, small third-floor balconies with black wrought-iron railings, a carved light-stone ledge above the ground floor and a stone cornice at the roofline. The ground floors have wooden doors and shop fronts, some under striped canvas awnings in dark green and cream. Along both sidewalks stand black cast-iron street lamps with lantern heads, alternating with plane trees with dense green foliage and mottled trunks growing from square stone planters with small flowers, and a few wooden benches on iron frames. Compact European hatchbacks in silver, dark blue, white and red are parked along both kerbs. At the far end, a round stone fountain sprays water from its central column into the basin in front of a wide cream-coloured building with a stone arcade. Warm low sun from the left casts long soft shadows of the trees and lamps across the cobblestones and lights the upper floors of the right-hand facades, while the left-hand facades are in cool shade. The sky is clear blue with a few thin clouds. Young man in a loose beige long-sleeved shirt, dark trousers, white sneakers and a white bucket hat (dancer) is about 12 m ahead of the camera in the centre of the frame, 6 m by the end of the shot, facing the camera. He dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations, drifting about a metre to his left over the clip. He is the only person in the shot; no moving cars, and no text or lettered signs appear.
+
+overall_soundscape: Quiet old-town street, distant birdsong, light breeze in the leaves, faint fountain splash far ahead; the scuffs, taps and breathing of the dancer as he dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations, drifting about a metre to his left over the clip.
+
+non_diegetic_music: N/A
+</pre></details>
+<details><summary>stage_aist_dance_1_175f.json</summary><pre>{
+  &quot;name&quot;: &quot;street_dance_175&quot;,
+  &quot;notes&quot;: &quot;Full 175-frame window: a street dancer performs in the middle of the road, camera walks slowly toward him and keeps him framed.&quot;,
+  &quot;fps&quot;: 24,
+  &quot;frames&quot;: 175,
+  &quot;size&quot;: [1344, 768],
+  &quot;style&quot;: &quot;live-action, photorealistic, sunny late afternoon, old-town street&quot;,
+  &quot;world&quot;: {&quot;generator&quot;: &quot;street&quot;, &quot;seed&quot;: 7},
+  &quot;camera&quot;: {
+    &quot;fov_deg&quot;: 50,
+    &quot;ease&quot;: &quot;linear&quot;,
+    &quot;bob&quot;: 0.02,
+    &quot;keyframes&quot;: [
+      {&quot;t&quot;: 0.0,  &quot;pos&quot;: [0.3, 1.65, 3.0],  &quot;look_at&quot;: {&quot;actor&quot;: &quot;A1&quot;, &quot;height&quot;: 1.1}},
+      {&quot;t&quot;: 7.29, &quot;pos&quot;: [0.3, 1.65, -3.0], &quot;look_at&quot;: {&quot;actor&quot;: &quot;A1&quot;, &quot;height&quot;: 1.1}}
+    ]
+  },
+  &quot;actors&quot;: [
+    {
+      &quot;id&quot;: &quot;A1&quot;,
+      &quot;name&quot;: &quot;dancer&quot;,
+      &quot;appearance&quot;: &quot;young man in a loose beige long-sleeved shirt, dark trousers, white sneakers and a white bucket hat&quot;,
+      &quot;track&quot;: {&quot;type&quot;: &quot;stand&quot;, &quot;x&quot;: 0.0, &quot;z&quot;: -9.0, &quot;yaw&quot;: 180},
+      &quot;performance&quot;: {
+        &quot;type&quot;: &quot;gvhmr&quot;,
+        &quot;results&quot;: &quot;/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/001/output/hmr4d_results.pt&quot;,
+        &quot;src_fps&quot;: 30, &quot;src_offset&quot;: 0.0, &quot;speed&quot;: 1.0, &quot;root_motion&quot;: &quot;track+local&quot;,
+        &quot;caption&quot;: &quot;dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations, drifting about a metre to his left over the clip&quot;
+      }
+    }
+  ],
+  &quot;audio&quot;: {
+    &quot;ambience&quot;: &quot;quiet old-town street, distant birdsong, light breeze in the leaves, faint fountain splash far ahead&quot;,
+    &quot;sfx_from_motion&quot;: true,
+    &quot;dialogue&quot;: [],
+    &quot;music&quot;: &quot;N/A&quot;
+  }
+}
+</pre></details>
+<h2>5. 双人舞台（剧本 → stage.json → 单帧渲染）</h2><div class="row">
+<figure><a href="assets/two_actors_gray_0087.png" target="_blank"><img src="assets/two_actors_gray_0087.png" width="672"></a><figcaption>第 87 帧：舞者在路中间，路人 box 在右侧人行道</figcaption></figure>
+</div>
+<details><summary>story_two_actors.txt</summary><pre>EXT. OLD-TOWN STREET - LATE AFTERNOON
+
+One continuous shot, about seven seconds.
+
+The camera walks slowly down the middle of the cobblestone street. Nine metres ahead, in the middle of the road
+and facing us, LEO (young man, loose beige long-sleeved shirt, dark trousers, white sneakers, white bucket hat)
+is already dancing: quick footwork, sharp arm swings, turns.
+
+On the right-hand sidewalk a PASSER-BY (older woman in a long grey coat with a brown shoulder bag) walks toward
+us, from far down the street to level with the camera, watching Leo as she passes.
+
+At three seconds she calls out &quot;Nice moves!&quot;. At five seconds Leo answers &quot;Thanks!&quot; without stopping.
+
+Sound: quiet street, birds, breeze, Leo&#x27;s sneakers on the stones, her heels on the sidewalk. No music.
+</pre></details>
+<details><summary>street_two_actors.json</summary><pre>{
+  &quot;name&quot;: &quot;street_two_actors&quot;,
+  &quot;notes&quot;: &quot;Compiled by hand from scripts/story_two_actors.txt following stage_spec.md: one gvhmr performer, one box-only passer-by on a waypoint track, two dialogue lines.&quot;,
+  &quot;fps&quot;: 24,
+  &quot;frames&quot;: 175,
+  &quot;size&quot;: [
+    1344,
+    768
+  ],
+  &quot;style&quot;: &quot;live-action, photorealistic, sunny late afternoon, old-town street&quot;,
+  &quot;world&quot;: {
+    &quot;generator&quot;: &quot;street&quot;,
+    &quot;seed&quot;: 7
+  },
+  &quot;camera&quot;: {
+    &quot;fov_deg&quot;: 50,
+    &quot;ease&quot;: &quot;linear&quot;,
+    &quot;bob&quot;: 0.02,
+    &quot;keyframes&quot;: [
+      {
+        &quot;t&quot;: 0.0,
+        &quot;pos&quot;: [
+          0.3,
+          1.65,
+          3.0
+        ],
+        &quot;look_at&quot;: {
+          &quot;actor&quot;: &quot;A1&quot;,
+          &quot;height&quot;: 1.1
+        }
+      },
+      {
+        &quot;t&quot;: 7.29,
+        &quot;pos&quot;: [
+          0.3,
+          1.65,
+          -2.5
+        ],
+        &quot;look_at&quot;: {
+          &quot;actor&quot;: &quot;A1&quot;,
+          &quot;height&quot;: 1.1
+        }
+      }
+    ]
+  },
+  &quot;actors&quot;: [
+    {
+      &quot;id&quot;: &quot;A1&quot;,
+      &quot;name&quot;: &quot;Leo&quot;,
+      &quot;appearance&quot;: &quot;young man in a loose beige long-sleeved shirt, dark trousers, white sneakers and a white bucket hat&quot;,
+      &quot;track&quot;: {
+        &quot;type&quot;: &quot;stand&quot;,
+        &quot;x&quot;: 0.0,
+        &quot;z&quot;: -9.0,
+        &quot;yaw&quot;: 180
+      },
+      &quot;performance&quot;: {
+        &quot;type&quot;: &quot;gvhmr&quot;,
+        &quot;results&quot;: &quot;/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/001/output/hmr4d_results.pt&quot;,
+        &quot;src_fps&quot;: 30,
+        &quot;src_offset&quot;: 0.0,
+        &quot;speed&quot;: 1.0,
+        &quot;root_motion&quot;: &quot;track+local&quot;,
+        &quot;caption&quot;: &quot;dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations&quot;
+      },
+      &quot;pronoun&quot;: &quot;he&quot;
+    },
+    {
+      &quot;id&quot;: &quot;A2&quot;,
+      &quot;name&quot;: &quot;passer-by&quot;,
+      &quot;appearance&quot;: &quot;older woman in a long grey coat with a brown shoulder bag&quot;,
+      &quot;height_m&quot;: 1.65,
+      &quot;track&quot;: {
+        &quot;type&quot;: &quot;waypoints&quot;,
+        &quot;ease&quot;: &quot;linear&quot;,
+        &quot;rest_yaw&quot;: 180,
+        &quot;points&quot;: [
+          {
+            &quot;t&quot;: 0.0,
+            &quot;x&quot;: 4.8,
+            &quot;z&quot;: -18.0
+          },
+          {
+            &quot;t&quot;: 7.29,
+            &quot;x&quot;: 4.8,
+            &quot;z&quot;: -3.0
+          }
+        ]
+      },
+      &quot;performance&quot;: {
+        &quot;type&quot;: &quot;box&quot;,
+        &quot;caption&quot;: &quot;walks up the right-hand sidewalk toward the camera at an unhurried pace, turning her head to watch Leo as she passes&quot;
+      },
+      &quot;pronoun&quot;: &quot;she&quot;
+    }
+  ],
+  &quot;interactions&quot;: [
+    {
+      &quot;t&quot;: 3.0,
+      &quot;actors&quot;: [
+        &quot;A2&quot;,
+        &quot;A1&quot;
+      ],
+      &quot;text&quot;: &quot;the passer-by looks at Leo and calls out to him; he keeps dancing&quot;
+    }
+  ],
+  &quot;audio&quot;: {
+    &quot;ambience&quot;: &quot;quiet old-town street, distant birdsong, light breeze in the leaves&quot;,
+    &quot;sfx_from_motion&quot;: true,
+    &quot;dialogue&quot;: [
+      {
+        &quot;t&quot;: 3.0,
+        &quot;actor&quot;: &quot;A2&quot;,
+        &quot;text&quot;: &quot;Nice moves!&quot;,
+        &quot;lang&quot;: &quot;en&quot;
+      },
+      {
+        &quot;t&quot;: 5.0,
+        &quot;actor&quot;: &quot;A1&quot;,
+        &quot;text&quot;: &quot;Thanks!&quot;,
+        &quot;lang&quot;: &quot;en&quot;
+      }
+    ],
+    &quot;music&quot;: &quot;N/A&quot;
+  }
+}</pre></details>
+<h2>6. 对照：原 whitebox 相机（CoDeR 复现用的那条，44 m / 7.3 s）</h2><div class="row">
+<figure><video src="assets/whitebox_original_camera.mp4" width="672" controls loop muted playsinline></video><figcaption>whitebox_original_camera.mp4 — 太快，人物几秒内从很小变到贴脸，所以舞台用自己的慢相机</figcaption></figure>
+</div></body></html>

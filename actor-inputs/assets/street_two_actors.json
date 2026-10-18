@@ -1,0 +1,126 @@
+{
+  "name": "street_two_actors",
+  "notes": "Compiled by hand from scripts/story_two_actors.txt following stage_spec.md: one gvhmr performer, one box-only passer-by on a waypoint track, two dialogue lines.",
+  "fps": 24,
+  "frames": 175,
+  "size": [
+    1344,
+    768
+  ],
+  "style": "live-action, photorealistic, sunny late afternoon, old-town street",
+  "world": {
+    "generator": "street",
+    "seed": 7
+  },
+  "camera": {
+    "fov_deg": 50,
+    "ease": "linear",
+    "bob": 0.02,
+    "keyframes": [
+      {
+        "t": 0.0,
+        "pos": [
+          0.3,
+          1.65,
+          3.0
+        ],
+        "look_at": {
+          "actor": "A1",
+          "height": 1.1
+        }
+      },
+      {
+        "t": 7.29,
+        "pos": [
+          0.3,
+          1.65,
+          -2.5
+        ],
+        "look_at": {
+          "actor": "A1",
+          "height": 1.1
+        }
+      }
+    ]
+  },
+  "actors": [
+    {
+      "id": "A1",
+      "name": "Leo",
+      "appearance": "young man in a loose beige long-sleeved shirt, dark trousers, white sneakers and a white bucket hat",
+      "track": {
+        "type": "stand",
+        "x": 0.0,
+        "z": -9.0,
+        "yaw": 180
+      },
+      "performance": {
+        "type": "gvhmr",
+        "results": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/001/output/hmr4d_results.pt",
+        "src_fps": 30,
+        "src_offset": 0.0,
+        "speed": 1.0,
+        "root_motion": "track+local",
+        "caption": "dances energetically in a street-dance style: quick footwork, sharp arm swings, turns and body isolations"
+      },
+      "pronoun": "he"
+    },
+    {
+      "id": "A2",
+      "name": "passer-by",
+      "appearance": "older woman in a long grey coat with a brown shoulder bag",
+      "height_m": 1.65,
+      "track": {
+        "type": "waypoints",
+        "ease": "linear",
+        "rest_yaw": 180,
+        "points": [
+          {
+            "t": 0.0,
+            "x": 4.8,
+            "z": -18.0
+          },
+          {
+            "t": 7.29,
+            "x": 4.8,
+            "z": -3.0
+          }
+        ]
+      },
+      "performance": {
+        "type": "box",
+        "caption": "walks up the right-hand sidewalk toward the camera at an unhurried pace, turning her head to watch Leo as she passes"
+      },
+      "pronoun": "she"
+    }
+  ],
+  "interactions": [
+    {
+      "t": 3.0,
+      "actors": [
+        "A2",
+        "A1"
+      ],
+      "text": "the passer-by looks at Leo and calls out to him; he keeps dancing"
+    }
+  ],
+  "audio": {
+    "ambience": "quiet old-town street, distant birdsong, light breeze in the leaves",
+    "sfx_from_motion": true,
+    "dialogue": [
+      {
+        "t": 3.0,
+        "actor": "A2",
+        "text": "Nice moves!",
+        "lang": "en"
+      },
+      {
+        "t": 5.0,
+        "actor": "A1",
+        "text": "Thanks!",
+        "lang": "en"
+      }
+    ],
+    "music": "N/A"
+  }
+}

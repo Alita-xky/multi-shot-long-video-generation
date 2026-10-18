@@ -1,0 +1,38 @@
+{
+  "name": "street_cartwheel_smoke",
+  "notes": "73-frame go/no-go for the pose+depth cue path: one performer does a cartwheel across the road while the camera walks slowly toward him.",
+  "fps": 24,
+  "frames": 73,
+  "size": [1344, 768],
+  "style": "live-action, photorealistic, sunny late afternoon, old-town street",
+  "world": {"generator": "street", "seed": 7},
+  "camera": {
+    "fov_deg": 50,
+    "ease": "linear",
+    "bob": 0.02,
+    "keyframes": [
+      {"t": 0.0,  "pos": [0.3, 1.65, 3.0],  "look_at": {"actor": "A1", "height": 1.0}},
+      {"t": 3.04, "pos": [0.3, 1.65, 0.6],  "look_at": {"actor": "A1", "height": 1.0}}
+    ]
+  },
+  "actors": [
+    {
+      "id": "A1",
+      "name": "martial artist",
+      "appearance": "young man in a white long-sleeved shirt and black trousers",
+      "track": {"type": "stand", "x": 1.3, "z": -6.5, "yaw": 90},
+      "performance": {
+        "type": "gvhmr",
+        "results": "/home/ma-user/modelarts/user-job-dir/lhk_data/lhk/exp_runs/10_18_gvhmr_refvideos_cpu/007/output/hmr4d_results.pt",
+        "src_fps": 30, "src_offset": 1.5, "speed": 1.0, "root_motion": "track+local",
+        "caption": "steps forward, swings his arms up and does a full cartwheel from right to left across the cobblestones, landing on his feet in a ready stance"
+      }
+    }
+  ],
+  "audio": {
+    "ambience": "quiet old-town street, distant birdsong, light breeze in the leaves",
+    "sfx_from_motion": true,
+    "dialogue": [],
+    "music": "N/A"
+  }
+}
